@@ -22,12 +22,23 @@ export default function Home() {
   }, [auth]);
 
   return (
-    <div>
-      {user ? (
-        <p>Welcome, {user.displayName}!</p>
-      ) : (
-        <p>Welcome to the site!</p>
-      )}
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
+        {user ? (
+          <div className="text-center">
+            <img
+              src={user.photoURL || '/default-profile-picture.png'} // You can use a default profile picture if none is available
+              alt={user.displayName}
+              className="mx-auto h-20 w-20 rounded-full bg-gray-100 p-1"
+            />
+            <h2 className="mt-4 text-2xl font-semibold">{user.displayName}</h2>
+            <p className="mt-2 text-gray-600">{user.email}</p>
+            {/* Additional user information can be displayed here */}
+          </div>
+        ) : (
+          <p className="text-center">Welcome to the site!</p>
+        )}
+      </div>
     </div>
   );
 }
