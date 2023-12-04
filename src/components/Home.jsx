@@ -1,44 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Import Firebase Authentication
+import React from 'react';
+import Navbar from './navbar';
+import logo from '../assets/logo.png';
+import graphic1 from '../assets/graphic1.png';
+import graphic2 from '../assets/graphic2.png';
 
 export default function Home() {
-  const auth = getAuth();
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // Listen for changes in the user's authentication state
-    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-      if (authUser) {
-        // User is signed in, update the state with the user's information
-        setUser(authUser);
-      } else {
-        // User is signed out, set user state to null
-        setUser(null);
-      }
-    });
-
-    // Cleanup the listener when the component unmounts
-    return () => unsubscribe();
-  }, [auth]);
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
-        {user ? (
-          <div className="text-center">
-            <img
-              src={user.photoURL || '/default-profile-picture.png'} // You can use a default profile picture if none is available
-              alt={user.displayName}
-              className="mx-auto h-20 w-20 rounded-full bg-gray-100 p-1"
-            />
-            <h2 className="mt-4 text-2xl font-semibold">{user.displayName}</h2>
-            <p className="mt-2 text-gray-600">{user.email}</p>
-            {/* Additional user information can be displayed here */}
-          </div>
-        ) : (
-          <p className="text-center">Welcome to the site!</p>
-        )}
+    <div>
+      <Navbar />
+      <section class="overflow-hidden min-h-screen bg-gray-50 sm:grid sm:grid-cols-2 sm:items-center">
+  <div class="p-8 md:p-12 lg:px-16 lg:py-24">
+    <div class="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
+      <h2 class="text-5xl font-bold text-gray-900 md:text-6xl">
+        SunRise Tech
+      </h2>
+
+      <p class="text-gray-500 md:mt-4 md:block">
+        Revolutioning the way you wake up by simulating natural sunlight.
+      </p>
+
+      <div class="mt-4 md:mt-8">
+        <a
+          href="/about"
+          class="inline-block rounded bg-emerald-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-emerald-700 focus:outline-none focus:ring focus:ring-yellow-400"
+        >
+          Learn More
+        </a>
+        
       </div>
+    </div>
+  </div>
+
+  <img
+    alt="Violin"
+    src={graphic1}
+    class="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-[calc(100%_-_4rem)] md:rounded-ss-[60px]"
+  />
+</section>
     </div>
   );
 }
