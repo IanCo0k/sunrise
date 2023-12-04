@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './navbar';
+import Navbar from './Navbar';
 import logo from '../assets/logo.png';
 
 export default function About() {
