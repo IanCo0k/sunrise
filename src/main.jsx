@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Updated import
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Updated import
 import Home from './components/Home.jsx';
 import About from './components/About.jsx';
 import Calendar from './components/Calendar.jsx';
