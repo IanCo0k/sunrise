@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from './Navbar';
 import logo from '../assets/logo.png';
+import Navbar from './Navbar';
 import graphic1 from '../assets/graphic1.png';
 import graphic2 from '../assets/graphic2.png';
 
