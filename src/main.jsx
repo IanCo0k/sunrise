@@ -7,6 +7,7 @@ import Calendar from './components/Calendar.jsx';
 import Wakeup from './components/Wakeup.jsx';
 import Config from './components/Config.jsx';
 import UserProfileUpdate from './components/UserProfileUpdate.jsx';
+import Events from './components/Events.jsx';
 import App from './App.jsx'; // Assuming you have a LoginPage component
 import './index.css';
 
@@ -29,6 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/wakeup" element={<Wakeup />} /> {/* Use Route and put the element in the Route */}
         <Route path="/config" element={<Config />} /> {/* Use Route and put the element in the Route */}
         <Route path="/userprofileupdate" element={<UserProfileUpdate />} /> {/* Use Route and put the element in the Route */}
+        <Route path="/events" element={<Events />} /> {/* Use Route and put the element in the Route */}
         <Route path="/" element={<App />} /> {/* Use Route and put the element in the Route */}
       </Routes>
     </React.StrictMode>

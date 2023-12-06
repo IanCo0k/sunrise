@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import TimePicker from './TimePicker';
 import Navbar from './Navbar';
 import {
   getFirestore,
@@ -9,7 +10,10 @@ import {
   deleteDoc,
   getDocs,
   updateDoc,
+  query,
+  where,
 } from 'firebase/firestore';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 
 const Calendar = () => {
   const [currentYear] = useState(2023);
@@ -19,6 +23,26 @@ const Calendar = () => {
   const [events, setEvents] = useState([]);
   const [newEventName, setNewEventName] = useState('');
   const [newEventStartTime, setNewEventStartTime] = useState('');
+
+  const auth = getAuth();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Listen for changes in the user's authentication state
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      if (authUser) {
+        // User is signed in, update the state with the user's information
+        setUser(authUser);
+        console.log(authUser.displayName);
+      } else {
+        // User is signed out, set user state to null
+        setUser(null);
+      }
+    });
+
+    // Clean up the listener when the component unmounts
+    return () => unsubscribe();
+  }, [auth]);
 
   const daysInMonth = (year, month) => {
     return new Date(year, month + 1, 0).getDate();
@@ -69,34 +93,51 @@ const Calendar = () => {
   };
 
   const fetchEvents = async () => {
+    if (!user) return; // Exit if user is not authenticated
+  
+    console.log('fetching...')
     const db = getFirestore();
     const eventsCollection = collection(db, 'calendar');
-
-    const querySnapshot = await getDocs(eventsCollection);
-
-    const fetchedEvents = [];
-    querySnapshot.forEach((doc) => {
-      fetchedEvents.push({ id: doc.id, ...doc.data() });
-    });
-
-    setEvents(fetchedEvents);
+  
+    const q = query(eventsCollection, where('userId', '==', user.uid)); // Filter events by user ID
+  
+    try {
+      const querySnapshot = await getDocs(q);
+  
+      const fetchedEvents = [];
+      querySnapshot.forEach((doc) => {
+        fetchedEvents.push({ id: doc.id, ...doc.data() });
+      });
+  
+      console.log('Fetched events:', fetchedEvents); // Log fetched events
+  
+      setEvents(fetchedEvents);
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
   };
+  
 
   useEffect(() => {
+    console.log('this was called...')
     fetchEvents();
-  }, []);
+  }, [user]);
 
   const addEvent = async () => {
     if (newEventName.trim() !== '' && selectedDate) {
+      if (!user) return; // Exit if user is not authenticated
+
       const dateStr = selectedDate;
-      const startTime = newEventStartTime || 'All day'; // Default to 'All day' if no start time provided
+      const startTime = newEventStartTime || 'All day';
       const db = getFirestore();
       const eventsCollection = collection(db, 'calendar');
 
+      // Include the user's ID when adding an event
       await addDoc(eventsCollection, {
         date: dateStr,
         event: newEventName,
         startTime: startTime,
+        userId: user.uid, // Store the user's ID
       });
 
       setNewEventName('');
@@ -194,26 +235,23 @@ const Calendar = () => {
                     </div>
                   ))}
                 <div className="mt-4">
-                  <input
-                    type="text"
-                    placeholder="Add event"
-                    value={newEventName}
-                    onChange={(e) => setNewEventName(e.target.value)}
-                    className="w-full rounded p-2"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Start time (optional)"
-                    value={newEventStartTime}
-                    onChange={(e) => setNewEventStartTime(e.target.value)}
-                    className="w-full rounded p-2 mt-2"
-                  />
-                  <button
-                    onClick={addEvent}
-                    className="btn-add-event bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md mt-2"
-                  >
-                    Add Event
-                  </button>
+                    <input
+                        type="text"
+                        placeholder="Add event"
+                        value={newEventName}
+                        onChange={(e) => setNewEventName(e.target.value)}
+                        className="w-full rounded p-2"
+                    />
+                    <TimePicker
+                        value={newEventStartTime}
+                        onChange={(newTime) => setNewEventStartTime(newTime)}
+                    />
+                    <button
+                        onClick={addEvent}
+                        className="btn-add-event bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md mt-2"
+                    >
+                        Add Event
+                    </button>
                 </div>
                 <button
                   className="btn-close-modal bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md mt-2"

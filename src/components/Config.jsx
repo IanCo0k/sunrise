@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from './Navbar';
 import {
   getFirestore,
   collection,
@@ -56,7 +57,9 @@ const Config = () => {
   };
 
   return (
-    <div className="container mx-auto mt-10">
+    <div>
+      <Navbar />
+      <div className="container mx-auto mt-10">
       <h1 className="text-2xl font-semibold mb-4">Data Entry</h1>
       <div className="mb-4">
         <input
@@ -114,6 +117,7 @@ const Config = () => {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 };

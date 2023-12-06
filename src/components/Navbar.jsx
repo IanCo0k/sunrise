@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { FiMenu } from 'react-icons/fi'; // Import the FiMenu icon
 
 const Navbar = () => {
     const auth = getAuth();
@@ -48,7 +49,7 @@ const Navbar = () => {
         return null;
     }
 
-    const { displayName, photoURL } = user; // Access user's display name and profile picture
+    const { displayName } = user; // Access user's display name
 
     return (
         <nav className="bg-blue-500 p-4 flex justify-between items-center">
@@ -63,10 +64,9 @@ const Navbar = () => {
                         onClick={toggleDropdown}
                         onBlur={closeDropdown}
                     >
-                        <img
-                            src={photoURL || '/default-profile-picture.png'}
-                            alt="Profile"
-                            className="w-8 h-8 rounded-full cursor-pointer"
+                        <FiMenu
+                            size={24} // Adjust the size as needed
+                            className="cursor-pointer"
                         />
                         {dropdownOpen && (
                             <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-300">
@@ -80,7 +80,7 @@ const Navbar = () => {
                                 <Link to="/calendar" className="block px-4 py-2 text-gray-800 hover:bg-blue-100">
                                     Calendar
                                 </Link>
-                                <Link to="/wakeup" className="block px-4 py-2 text-gray-800 hover:bg-blue-100">
+                                <Link to="/wakeup" className="block px-4 py-2 text-gray-800 hover-bg-blue-100">
                                     Wake Up
                                 </Link>
                                 <Link to="/config" className="block px-4 py-2 text-gray-800 hover:bg-blue-100 hover:rounded">
@@ -89,7 +89,9 @@ const Navbar = () => {
                                 <Link to="/userprofileupdate" className="block px-4 py-2 text-gray-800 hover:bg-blue-100 hover:rounded">
                                     Update Profile
                                 </Link>
-
+                                <Link to="/events" className="block px-4 py-2 text-gray-800 hover:bg-blue-100 hover:rounded">
+                                    Events
+                                </Link>
                                 <Link to="/" className="block px-4 py-2 text-gray-800 hover:bg-blue-100" onClick={handleLogout}>
                                     Log Out
                                 </Link>
