@@ -173,7 +173,7 @@ const Calendar = () => {
   };
 
   return (
-    <div>
+    <div className='pt-[75px] min-h-screen bg-gradient-to-r from-yellow-300 to-red-500'>
       <Navbar />
       <div className="calendar mt-8 bg-white p-4 rounded shadow-lg max-w-screen-md mx-auto">
         <div className="calendar-header mb-4">

@@ -1,42 +1,55 @@
-import React from 'react';
-import logo from '../assets/logo.png';
-import Navbar from './Navbar';
-import graphic1 from '../assets/graphic1.png';
-import graphic2 from '../assets/graphic2.png';
+import React from "react";
+import logo from "../assets/logo.png";
+import Navbar from "./Navbar";
+import graphic1 from "../assets/graphic1.png";
+import background from '../assets/background.png';
+import { Link } from "react-router-dom";
 
 export default function Home() {
+  const backgroundStyle = {
+    backgroundImage: `url(${background})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    position: "relative", // The parent needs to be relative
+  };
+
+  const overlayStyle = {
+    content: "",
+    position: "absolute", // Position it absolutely
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // This is the overlay color
+    zIndex: 1, // Ensure it's behind the content
+  };
+
   return (
-    <div>
+    <div style={backgroundStyle}>
       <Navbar />
-      <section class="overflow-hidden min-h-screen bg-gray-50 sm:grid sm:grid-cols-2 sm:items-center">
-  <div class="p-8 md:p-12 lg:px-16 lg:py-24">
-    <div class="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-      <h2 class="text-5xl font-bold text-gray-900 md:text-6xl">
-        SunRise Tech
-      </h2>
-
-      <p class="text-gray-500 md:mt-4 md:block">
-        Revolutioning the way you wake up by simulating natural sunlight.
-      </p>
-
-      <div class="mt-4 md:mt-8">
-        <a
-          href="/about"
-          class="inline-block rounded bg-emerald-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-emerald-700 focus:outline-none focus:ring focus:ring-yellow-400"
-        >
-          Learn More
-        </a>
-        
-      </div>
-    </div>
-  </div>
-
-  <img
-    alt="Violin"
-    src={graphic1}
-    class="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-[calc(100%_-_4rem)] md:rounded-ss-[60px]"
-  />
-</section>
+      <div style={overlayStyle}></div> {/* Overlay is separate */}
+      <section className="flex flex-col min-h-screen justify-center align-middle relative z-10"> {/* Higher z-index to be above the overlay */}
+        <div className="p-12 md:p-24 text-center flex flex-col justify-center items-center">
+          <img
+            src={logo}
+            alt="Sunrise Tech Logo"
+            className="w-32 h-32 rounded-full"
+          />
+          <h2 className="text-5xl font-bold text-white md:text-8xl mb-3">
+            SunRise Tech
+          </h2>
+          <p className="text-white text-lg mb-8 md:text-xl">
+            Revolutionizing the way you wake up by simulating natural sunlight.
+          </p>
+          <Link
+            to="/about"
+            className="inline-block rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-4 text-sm font-medium text-white transition hover:bg-gradient-to-br focus:outline-none focus:ring focus:ring-yellow-400 mb-4 md:mb-8"
+          >
+            Learn More
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

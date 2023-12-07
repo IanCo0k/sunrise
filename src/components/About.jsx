@@ -1,24 +1,26 @@
 import React from 'react';
 import Navbar from './Navbar';
-import logo from '../assets/logo.png';
 
 export default function About() {
+
+
+
+  
   return (
     <div>
       <Navbar />
-      <section className="bg-white text-gray-800">
-        <div className="max-w-screen-xl mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <section className="bg-gradient-to-r from-yellow-300 to-red-500 min-h-screen pt-10 text-gray-800">
+        <div className="max-w-[800px] mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
           <div className="max-w-xl text-center">
-            <img src={logo} className="w-[150px] h-[150px] mb-3 rounded" alt="Sunrise Tech Logo" />
             <h2 className="text-5xl font-bold sm:text-7xl">Why Choose Sunrise Tech?</h2>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 md:gap-12 lg:grid-cols-2">
-            <div className="flex items-start gap-4">
-              <span className="shrink-0 rounded-lg bg-gray-300 p-4 text-gray-800">
+            <div className=" p-2 rounded-[10px] flex items-start gap-4">
+              <span className="shrink-0 rounded-lg bg-gray-700 p-4 text-gray-800">
                 <svg
                   className="h-5 w-5"
-                  fill="none"
+                  fill="white"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -38,11 +40,11 @@ export default function About() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4">
-              <span className="shrink-0 rounded-lg bg-gray-300 p-4 text-gray-800">
+            <div className=" p-2 rounded-[10px] flex items-start gap-4">
+              <span className="shrink-0 rounded-lg bg-gray-700 p-4 text-gray-800">
                 <svg
                   className="h-5 w-5"
-                  fill="none"
+                  fill="white"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -61,11 +63,11 @@ export default function About() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4">
-              <span className="shrink-0 rounded-lg bg-gray-300 p-4 text-gray-800">
+            <div className=" p-2 rounded-[10px] flex items-start gap-4">
+              <span className="shrink-0 rounded-lg bg-gray-700 p-4 text-gray-800">
                 <svg
                   className="h-5 w-5"
-                  fill="none"
+                  fill="white"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -84,11 +86,11 @@ export default function About() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4">
-              <span className="shrink-0 rounded-lg bg-gray-300 p-4 text-gray-800">
+            <div className=" p-2 rounded-[10px] flex items-start gap-4">
+              <span className="shrink-0 rounded-lg bg-gray-700 p-4 text-gray-800">
                 <svg
                   className="h-5 w-5"
-                  fill="none"
+                  fill="white"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -107,11 +109,11 @@ export default function About() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4">
-              <span className="shrink-0 rounded-lg bg-gray-300 p-4 text-gray-800">
+            <div className=" p-2 rounded-[10px] flex items-start gap-4">
+              <span className="shrink-0 rounded-lg bg-gray-700 p-4 text-gray-800">
                 <svg
                   className="h-5 w-5"
-                  fill="none"
+                  fill="white"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -130,11 +132,11 @@ export default function About() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4">
-              <span className="shrink-0 rounded-lg bg-gray-300 p-4 text-gray-800">
+            <div className=" p-2 rounded-[10px] flex items-start gap-4">
+              <span className="shrink-0 rounded-lg bg-gray-700 p-4 text-gray-800">
                 <svg
                   className="h-5 w-5"
-                  fill="none"
+                  fill="white"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"

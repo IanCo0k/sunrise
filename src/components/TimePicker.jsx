@@ -23,7 +23,7 @@ const TimePicker = ({ value, onChange }) => {
   return (
     <div>
       <input
-        type="text"
+        type="time"
         placeholder="Start time (e.g., 12:00 AM)"
         value={time}
         onChange={handleTimeChange}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import { FiMenu } from 'react-icons/fi'; // Import the FiMenu icon
+import { Link } from 'react-router-dom';
+import { FiMenu } from 'react-icons/fi';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
     const auth = getAuth();
@@ -9,18 +10,14 @@ const Navbar = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     useEffect(() => {
-        // Listen for changes in the user's authentication state
         const unsubscribe = onAuthStateChanged(auth, (authUser) => {
             if (authUser) {
-                // User is signed in, update the state with the user's information
                 setUser(authUser);
             } else {
-                // User is signed out, set user state to null
                 setUser(null);
             }
         });
 
-        // Clean up the listener when the component unmounts
         return () => unsubscribe();
     }, [auth]);
 
@@ -35,28 +32,28 @@ const Navbar = () => {
     const handleLogout = () => {
         signOut(auth)
             .then(() => {
-                // User is signed out, set user state to null
                 setUser(null);
             })
             .catch((error) => {
-                // Handle error
                 console.log('Error logging out:', error);
             });
     };
 
     if (!user) {
-        // Handle the case when the user is not authenticated
         return null;
     }
 
-    const { displayName } = user; // Access user's display name
+    const { displayName } = user;
 
     return (
-        <nav className="bg-blue-500 p-4 flex justify-between items-center">
-            <Link to="/" className="text-white font-bold text-lg">
-                SunRise Tech
-            </Link>
-            <div className="flex items-center space-x-4">
+        <nav className="bg-blue-500 z-[100] mt-4 p-4 m-4 fixed top-0 left-0 right-0 mx-auto max-w-screen-md rounded-full">
+            <div className="flex justify-between items-center">
+                <div className="flex items-center">
+                    <img src={logo} alt="Logo" className="w-8 h-8 mr-2 rounded-full" />
+                    <Link to="/home" className="text-white font-bold text-lg">
+                        SunRise Tech
+                    </Link>
+                </div>
                 <div className="text-white flex items-center">
                     Hi, {displayName}
                     <div
@@ -65,26 +62,28 @@ const Navbar = () => {
                         onBlur={closeDropdown}
                     >
                         <FiMenu
-                            size={24} // Adjust the size as needed
+                            size={24}
                             className="cursor-pointer"
                         />
                         {dropdownOpen && (
                             <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-300">
-                                {/* Dropdown menu items */}
                                 <Link to="/home" className="block px-4 py-2 text-gray-800 hover:bg-blue-100">
                                     Home
                                 </Link>
                                 <Link to="/about" className="block px-4 py-2 text-gray-800 hover:bg-blue-100">
                                     About
                                 </Link>
+                                <Link to="/alarm" className="block px-4 py-2 text-gray-800 hover:bg-blue-100">
+                                    Alarm
+                                </Link>
                                 <Link to="/calendar" className="block px-4 py-2 text-gray-800 hover:bg-blue-100">
                                     Calendar
                                 </Link>
-                                <Link to="/wakeup" className="block px-4 py-2 text-gray-800 hover-bg-blue-100">
-                                    Wake Up
-                                </Link>
                                 <Link to="/config" className="block px-4 py-2 text-gray-800 hover:bg-blue-100 hover:rounded">
                                     Configure
+                                </Link>
+                                <Link to="/credits" className="block px-4 py-2 text-gray-800 hover:bg-blue-100 hover:rounded">
+                                    Credits
                                 </Link>
                                 <Link to="/userprofileupdate" className="block px-4 py-2 text-gray-800 hover:bg-blue-100 hover:rounded">
                                     Update Profile
