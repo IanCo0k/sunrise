@@ -55,35 +55,40 @@ const Calendar = () => {
 
   const renderCalendar = () => {
     const calendar = [];
-
+  
     const handleDateClick = (day) => {
-      setSelectedDate(day);
+      const [year, month, date] = day.split('-').map((part) => part.padStart(2, '0'));
+      const formattedDay = `${year}-${month}-${date}`;
+  
+      setSelectedDate(formattedDay);
       setIsModalOpen(true);
     };
-
+  
     for (let i = 0; i < firstDayOfMonth; i++) {
       calendar.push(
         <div key={`empty-${i}`} className="calendar-cell empty-cell"></div>
       );
     }
-
+  
     for (let day = 1; day <= days; day++) {
-      const dateStr = `${currentYear}-${currentMonth + 1}-${day}`;
+      const paddedDay = day.toString().padStart(2, '0');
+      const paddedMonth = (currentMonth + 1).toString().padStart(2, '0');
+      const dateStr = `${currentYear}-${paddedMonth}-${paddedDay}`;
       const hasEvent = eventDates.includes(dateStr);
-
+  
       calendar.push(
         <div
           key={`day-${day}`}
-          className={`calendar-cell ${hasEvent ? 'bg-blue-100' : ''} ${
-            dateStr === selectedDate ? 'bg-blue-200' : ''
-          } cursor-pointer p-2 rounded-full`}
+          className={`calendar-cell cursor-pointer p-2 rounded-full ${
+            hasEvent ? 'bg-blue-100' : ''
+          } ${dateStr === selectedDate ? 'bg-blue-200' : ''}`}
           onClick={() => handleDateClick(dateStr)}
         >
           {day}
         </div>
       );
     }
-
+  
     return calendar;
   };
 

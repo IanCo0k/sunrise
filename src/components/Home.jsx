@@ -42,12 +42,20 @@ export default function Home() {
           <p className="text-white text-lg mb-8 md:text-xl">
             Revolutionizing the way you wake up by simulating natural sunlight.
           </p>
-          <Link
-            to="/about"
-            className="inline-block rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-4 text-sm font-medium text-white transition hover:bg-gradient-to-br focus:outline-none focus:ring focus:ring-yellow-400 mb-4 md:mb-8"
-          >
-            Learn More
-          </Link>
+          <div className="flex flex-wrap justify-center">
+            <Link
+              to="/about"
+              className="inline-block rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-4 text-sm font-medium text-white transition hover:bg-gradient-to-br focus:outline-none focus:ring focus:ring-yellow-400 mb-4 md:mb-8 mr-4"
+            >
+              Learn More
+            </Link>
+            <Link
+              to="/alarm"
+              className="inline-block rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 px-8 py-4 text-sm font-medium text-white transition hover:bg-gradient-to-br focus:outline-none focus:ring focus:ring-blue-400 mb-4 md:mb-8"
+            >
+              View Alarms
+            </Link>
+          </div>
         </div>
       </section>
     </div>

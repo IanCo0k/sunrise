@@ -46,7 +46,7 @@ const Navbar = () => {
     const { displayName } = user;
 
     return (
-        <nav className="bg-blue-500 z-[100] mt-4 p-4 m-4 fixed top-0 left-0 right-0 mx-auto max-w-screen-md rounded-full">
+        <nav className="bg-orange-700 z-[100] mt-4 p-4 m-4 fixed top-0 left-0 right-0 mx-auto max-w-screen-md rounded-full shadow-sm">
             <div className="flex justify-between items-center">
                 <div className="flex items-center">
                     <img src={logo} alt="Logo" className="w-8 h-8 mr-2 rounded-full" />
